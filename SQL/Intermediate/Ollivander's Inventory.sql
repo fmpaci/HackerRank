@@ -17,21 +17,21 @@
  
 
 SELECT 
-	  A.id
-	, A.age
-    , A.coins_needed
-    , A.power 
+	  A.ID
+	, A.AGE
+    , A.COINS_NEEDED
+    , A.POWER 
 FROM  
     (   SELECT 
-			 w1.id as id
-			,age
-			,coins_needed
-			,power
-			,row_number() OVER(PARTITION BY age,power ORDER BY coins_needed asc) as rn
-        FROM wands w1 
-            join wands_property w2 
-                on w1.code = w2.code
-        where is_evil = 0
+			 W1.ID AS ID
+			,AGE
+			,COINS_NEEDED
+			,POWER
+			,ROW_NUMBER() OVER(PARTITION BY AGE,POWER ORDER BY COINS_NEEDED ASC) AS RN
+        FROM WANDS W1 
+            JOIN WANDS_PROPERTY W2 
+                ON W1.CODE = W2.CODE
+        WHERE IS_EVIL = 0
 	) A
-where A.rn = 1
-order by power desc, age desc;
+WHERE A.RN = 1
+ORDER BY POWER DESC, AGE DESC;
